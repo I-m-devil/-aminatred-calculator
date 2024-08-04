@@ -1,0 +1,120 @@
+
+
+CSS (in style.css file):
+
+body {
+	background-color: black;
+	font-family: Arial, sans-serif;
+}
+
+.calculator-container {
+	width: 350px;
+	margin: 50px auto;
+	text-align: center;
+}
+
+.calculator {
+	background-color: rgb(238, 200, 200);
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#display {
+	width: 100%;
+	height: 40px;
+	text-align: right;
+	font-size: 24px;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.buttons {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+}
+
+button {
+	width: 100%;
+	height: 40px;
+	font-size: 18px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background-color: #a26464;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.number {
+	background-color: purple;
+	color: rgb(27, 23, 31);
+}
+
+button:hover {
+	background-color: #ccc;
+}
+
+.additional-features {
+	margin-top: 20px;
+}
+
+.history-container {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.history-header {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.history {
+	font-size: 16px;
+}
+
+
+JavaScript (in script.js file):
+
+let displayValue = '';
+let calculationHistory = [];
+
+function appendNumber(number) {
+	displayValue += number;
+	document.getElementById('display').value = displayValue;
+}
+
+function clearDisplay() {
+	displayValue = '';
+	document.getElementById('display').value = displayValue;
+}
+
+function performOperation(operation) {
+	displayValue += operation;
+	document.getElementById('display').value = displayValue;
+}
+
+function calculateResult() {
+	try {
+		const result = eval(displayValue);
+		displayValue = result.toString();
+		document.getElementById('display').value = displayValue;
+		animateResult();
+		calculationHistory.push(`${displayValue} = ${result}`);
+		updateHistory();
+	} catch (error) {
+		displayValue = 'Error';
+		document.getElementById('display').value = displayValue;
+	}
+}
+
+function animateResult
